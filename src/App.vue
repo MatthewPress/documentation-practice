@@ -43,10 +43,16 @@ async function getReleases() {
 </template>
 
 <style scoped>
+section {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
 article {
   background-color: white;
   color: black;
   display: flex;
   flex-direction: column;
+  margin: 10px;
 }
 </style>
