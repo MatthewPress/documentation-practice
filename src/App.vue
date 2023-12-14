@@ -3,7 +3,9 @@ import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
 import { ref } from 'vue'
 
-let count = ref(0)
+function getReleases() {
+  fetch()
+}
 
 </script>
 
@@ -12,7 +14,7 @@ let count = ref(0)
   </header>
 
   <main>
-    <button @click="count++">{{ count }}</button>
+    <button @click="getReleases">Get Releases</button>
   </main>
 </template>
 
