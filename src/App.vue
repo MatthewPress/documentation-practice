@@ -40,6 +40,7 @@ async function getReleases() {
       </article>
     </section>
     <p>Just making another pr</p>
+    <p>Elephant</p>
   </main>
 </template>
 
