@@ -7,7 +7,7 @@ let http = axios.create({
   baseURL: "https://api.github.com/repos/MatthewPress/documentation-practice/releases",
   headers: {
     "Content-type": "application/json",
-    "Authorization": `Bearer ${process.env.VUE_APP_GITHUB_TOKEN}`
+    "Authorization": `Bearer ${process.env.VUE_APP_GITHUB_TOKEN}` 
   }
 });
 
@@ -16,7 +16,7 @@ let releases = ref([]);
 async function getReleases() {
   try {
     const res = await http.get()
-    releases.value = await res.data.json()
+    releases.value = res.data
     console.log(releases.value)
   } catch (err) {
     console.log(err.message)
@@ -32,8 +32,11 @@ async function getReleases() {
   <main>
     <button @click="getReleases">Get Releases</button>
     <section v-for="(release, index) in releases">
-      <article key={{ release.index }}>
-        <h2>{{ release.id }}</h2>
+      <article>
+        <h2>{{ release.name }}</h2>
+        <h3>{{ release.body }}</h3>
+        <p>{{ release.tag_name }}</p>
+        <p>{{ release.published_at }}</p>
       </article>
     </section>
   </main>
@@ -42,7 +45,8 @@ async function getReleases() {
 <style scoped>
 article {
   background-color: white;
-  height: 5rem;
-  width: 5rem;
+  color: black;
+  display: flex;
+  flex-direction: column;
 }
 </style>
