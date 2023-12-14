@@ -39,6 +39,7 @@ async function getReleases() {
         <p>{{ release.published_at }}</p>
       </article>
     </section>
+    <p>Just making another pr</p>
   </main>
 </template>
 
