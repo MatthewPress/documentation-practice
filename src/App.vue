@@ -29,8 +29,10 @@ async function getReleases() {
 </script>
 
 <template>
-  <header v-for="source in sources">
-    <button @click="getReleases(source)">{{ source }} Releases</button>
+  <header>
+    <template v-for="(source, index) in sources" :key="index">
+      <button @click="getReleases(source)">{{ source }} Releases</button>
+    </template>
   </header>
 
   <main>
@@ -43,6 +45,11 @@ async function getReleases() {
 </template>
 
 <style scoped>
+header {
+  display: flex;
+  background-color: black;
+  padding: 1rem;
+}
 section {
   display: flex;
   flex-direction: column;
@@ -54,5 +61,6 @@ button {
   height: 2rem;
   border: 0px;
   border-radius: 5px;
+  margin-right: 1rem;
 }
 </style>

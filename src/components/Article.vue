@@ -20,5 +20,6 @@ article {
   margin: 10px;
   border: 5px solid black;
   border-radius: 10px;
+  max-width: 50%;
 }
 </style>
