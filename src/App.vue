@@ -1,9 +1,10 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
+import Article from './components/Article.vue';
 
 // Where do I get the correct access token?
-let http = axios.create({
+const githubHttp = axios.create({
   baseURL: "https://api.github.com/repos/MatthewPress/documentation-practice/releases",
   headers: {
     "Content-type": "application/json",
@@ -11,11 +12,21 @@ let http = axios.create({
   }
 });
 
-let releases = ref([]);
+const jiraHttp = axios.create({
+  baseURL: "https://api.github.com/repos/MatthewPress/documentation-practice/releases",
+  headers: {
+    "Content-type": "application/json",
+    "Authorization": `Bearer ${process.env.VUE_APP_GITHUB_TOKEN}` 
+  }
+});
+
+const sources = ['GitHub', 'Jira'];
+
+const releases = ref([]);
 
 async function getReleases() {
   try {
-    const res = await http.get()
+    const res = await githubHttp.get()
     releases.value = res.data
     console.log(releases.value)
   } catch (err) {
@@ -27,17 +38,14 @@ async function getReleases() {
 
 <template>
   <header>
+    <template v-for="(source, index) in sources" :key="index">
+      <button @click="getReleases(source)">{{ source }} Releases</button>
+    </template>
   </header>
 
   <main>
-    <button @click="getReleases">Get Releases</button>
-    <section v-for="(release, index) in releases">
-      <article>
-        <h2>{{ release.name }}</h2>
-        <h3>{{ release.body }}</h3>
-        <p>{{ release.tag_name }}</p>
-        <p>{{ release.published_at }}</p>
-      </article>
+    <section v-for="(release, index) in releases" :key="index">
+      <Article :release="release"></Article>
     </section>
     <p>Just making another pr</p>
     <p>Elephant</p>
@@ -45,16 +53,22 @@ async function getReleases() {
 </template>
 
 <style scoped>
+header {
+  display: flex;
+  background-color: black;
+  padding: 1rem;
+}
 section {
   display: flex;
   flex-direction: column;
   margin: 10px;
 }
-article {
+button {
   background-color: white;
-  color: black;
-  display: flex;
-  flex-direction: column;
-  margin: 10px;
+  font-weight: bold;
+  height: 2rem;
+  border: 0px;
+  border-radius: 5px;
+  margin-right: 1rem;
 }
 </style>
