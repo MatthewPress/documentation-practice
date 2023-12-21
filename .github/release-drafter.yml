@@ -1,4 +1,4 @@
-name-template: 'v$RESOLVED_VERSION'
+name-template: 'What has changed'
 tag-template: 'v$RESOLVED_VERSION'
 categories:
   - title: '🚀 PRs'
