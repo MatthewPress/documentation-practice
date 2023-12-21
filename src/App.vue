@@ -4,7 +4,15 @@ import axios from 'axios'
 import Article from './components/Article.vue';
 
 // Where do I get the correct access token?
-const http = axios.create({
+const githubHttp = axios.create({
+  baseURL: "https://api.github.com/repos/MatthewPress/documentation-practice/releases",
+  headers: {
+    "Content-type": "application/json",
+    "Authorization": `Bearer ${process.env.VUE_APP_GITHUB_TOKEN}` 
+  }
+});
+
+const jiraHttp = axios.create({
   baseURL: "https://api.github.com/repos/MatthewPress/documentation-practice/releases",
   headers: {
     "Content-type": "application/json",
@@ -18,7 +26,7 @@ const releases = ref([]);
 
 async function getReleases() {
   try {
-    const res = await http.get()
+    const res = await githubHttp.get()
     releases.value = res.data
     console.log(releases.value)
   } catch (err) {
