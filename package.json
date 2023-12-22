@@ -12,6 +12,7 @@
   "dependencies": {
     "@vue/cli-service": "^5.0.8",
     "axios": "^0.22.0",
+    "marked": "^11.1.0",
     "vue": "^3.3.10"
   },
   "devDependencies": {

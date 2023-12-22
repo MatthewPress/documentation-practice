@@ -1,14 +1,16 @@
 <script setup>
+import { marked } from 'marked';
 const props = defineProps({
   release: { required: true }
 })
+console.log(marked.parse(props?.release.body))
 </script>
 <template>
   <article>
     <h2>{{ release.name }}</h2>
     <p>{{ release.tag_name }} | {{ release.published_at }}</p>
     <hr />
-    <h3>{{ release.body }}</h3>
+    {{ marked.parse(props?.release.body) }}
   </article>
 </template>
 <style scoped>

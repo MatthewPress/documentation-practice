@@ -47,8 +47,6 @@ async function getReleases() {
     <section v-for="(release, index) in releases" :key="index">
       <Article :release="release"></Article>
     </section>
-    <p>Just making another pr</p>
-    <p>Elephant</p>
   </main>
 </template>
 
